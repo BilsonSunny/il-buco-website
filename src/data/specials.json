@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2025-01-20",
+    "title": "Chef's Special: Osso Buco Milanese",
+    "description": "Slow-braised veal shank with saffron risotto, gremolata and a rich white wine reduction.",
+    "price": "$38.50",
+    "category": "Entrée"
+  },
+  {
+    "date": "2025-01-20",
+    "title": "Pasta Special: Tagliatelle al Ragù",
+    "description": "Hand-cut tagliatelle with a slow-cooked Bolognese of beef and pork, topped with aged Parmigiano.",
+    "price": "$27.50",
+    "category": "Pasta"
+  },
+  {
+    "date": "2025-01-20",
+    "title": "Soup: Ribollita Toscana",
+    "description": "Tuscan bread and vegetable soup with cannellini beans, kale and extra virgin olive oil.",
+    "price": "$12.50",
+    "category": "Soup"
+  }
+]

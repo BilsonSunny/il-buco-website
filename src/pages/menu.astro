@@ -1,0 +1,459 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { dinnerMenu, lunchMenu } from '../data/menu.js';
+---
+<Layout title="Menu" description="Explore the full dinner and lunch menus at Il Buco Ristorante in Downtown Barrie, Ontario.">
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="ph-inner">
+      <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="ph-logo" />
+      <h1 class="ph-title">Our Menu</h1>
+      <p class="ph-sub">Crafted fresh. Inspired by the heart of Italy.</p>
+    </div>
+  </header>
+
+  <!-- TAB NAV -->
+  <nav class="tab-nav" id="tabNav">
+    <div class="tab-nav-inner">
+      <button class="tab active" data-tab="dinner">Dinner</button>
+      <button class="tab" data-tab="lunch">Lunch</button>
+      <button class="tab" data-tab="threecourse">Three Course Lunch · $25.95</button>
+    </div>
+  </nav>
+
+  <!-- DINNER -->
+  <section class="menu-section-wrap" id="tab-dinner">
+    <div class="mw-inner">
+
+      <div class="allergy-note">
+        Gluten free pasta available for an additional $2.50 · Please inform your server of any serious allergies.
+      </div>
+
+      <div class="menu-block">
+        <h2 class="block-title"><em>Insalate</em> — Salads</h2>
+        <div class="items">
+          {dinnerMenu.salads.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <h2 class="block-title"><em>Antipasti</em> — Appetizers</h2>
+        <div class="items">
+          {dinnerMenu.appetizers.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <h2 class="block-title"><em>Pasta</em></h2>
+        <div class="items">
+          {dinnerMenu.pasta.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="menu-block">
+        <h2 class="block-title"><em>Secondi</em> — Entrees</h2>
+        <p class="block-note">All entrees served with roasted potatoes & daily fresh vegetables</p>
+        <div class="items">
+          {dinnerMenu.entrees.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUNCH -->
+  <section class="menu-section-wrap hidden" id="tab-lunch">
+    <div class="mw-inner">
+      <div class="menu-block">
+        <h2 class="block-title"><em>Antipasti e Insalate</em> — Appetizers & Salads</h2>
+        <div class="items">
+          {lunchMenu.appetizersAndSalads.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="menu-block">
+        <h2 class="block-title"><em>Secondi</em> — Lunch Entrees</h2>
+        <div class="items">
+          {lunchMenu.entrees.map(item => (
+            <div class="item">
+              <div class="item-row">
+                <span class="item-name">{item.name}</span>
+                <span class="item-dots"></span>
+                <span class="item-price">{item.price}</span>
+              </div>
+              <p class="item-desc">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE COURSE -->
+  <section class="menu-section-wrap hidden" id="tab-threecourse">
+    <div class="mw-inner">
+      <div class="tc-banner">
+        <img src="/il-buco-logo.jpg" alt="Il Buco" class="tc-logo" />
+        <div>
+          <h2 class="tc-heading">Three Course Lunch</h2>
+          <p class="tc-price">$25.95 per person</p>
+          <p class="tc-sub">Choose one from each course for a complete Italian dining experience</p>
+        </div>
+      </div>
+
+      <div class="tc-grid">
+        <div class="tc-course">
+          <div class="tc-course-header">
+            <span class="tc-num">01</span>
+            <h3 class="tc-course-name"><em>Primo</em> — First Course</h3>
+          </div>
+          <div class="tc-items">
+            <div class="tc-item"><strong>House Soup of the Day</strong><p>Made fresh daily</p></div>
+            <div class="tc-item"><strong>Italian Salad</strong><p>Fresh spring mixed greens with our own Italian vinaigrette</p></div>
+            <div class="tc-item supplement"><strong>Tomato Goat Cheese Salad</strong><p>Fresh tomato with lemon scented creamed goat's cheese, extra virgin olive oil and balsamic vinegar</p><span>+ $2.00</span></div>
+            <div class="tc-item supplement"><strong>Classic Caesar Salad</strong><p>Crisp romaine, herb croutons, bacon and Parmigiano-Reggiano in our house roasted garlic dressing</p><span>+ $2.00</span></div>
+            <div class="tc-item"><strong>Beef Carpaccio</strong><p>Shaved blue rare beef tenderloin with mixed greens and Parmigiano cheese</p></div>
+          </div>
+        </div>
+
+        <div class="tc-course">
+          <div class="tc-course-header">
+            <span class="tc-num">02</span>
+            <h3 class="tc-course-name"><em>Secondo</em> — Main Course</h3>
+          </div>
+          <div class="tc-items">
+            <div class="tc-item"><strong>Spaghetti Basilico</strong><p>Spaghetti in a classic tomato sauce with fresh basil</p></div>
+            <div class="tc-item"><strong>Pork Scaloppini</strong><p>Pork scaloppini in a lemon white wine sauce · Substitute Veal +$5.00</p></div>
+            <div class="tc-item supplement"><strong>Lasagna</strong><p>House made lasagna with Bolognese sauce, Parma prosciutto and mozzarella</p><span>+ $4.00</span></div>
+            <div class="tc-item"><strong>Fusilli with Tuna</strong><p>Fusilli in a fresh tomato sauce with tuna and capers</p></div>
+            <div class="tc-item"><strong>Penne Funghi</strong><p>Penne with mushrooms in a rosé sauce</p></div>
+            <div class="tc-item"><strong>Penne Arrabiata</strong><p>Penne in a spicy tomato sauce</p></div>
+          </div>
+        </div>
+
+        <div class="tc-course">
+          <div class="tc-course-header">
+            <span class="tc-num">03</span>
+            <h3 class="tc-course-name"><em>Dolce</em> — Dessert</h3>
+          </div>
+          <div class="tc-items">
+            <div class="tc-item"><strong>Vanilla or Chocolate Ice Cream</strong><p>A classic Italian finish</p></div>
+            <div class="tc-item supplement"><strong>Tiramisu</strong><p>Our classic house-made tiramisu</p><span>+ $3.00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <div class="menu-cta">
+    <p>Reservations recommended · <strong>705-735-9595</strong></p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;">
+      <a href="tel:7057359595" class="btn btn-crimson" style="background:white;color:var(--crimson);border-color:white;">📞 Call Now</a>
+      <a href="/specials" class="btn btn-outline-cream">Today's Specials</a>
+    </div>
+  </div>
+
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--crimson);
+    padding-top: 72px;
+    text-align: center;
+    padding-bottom: 4rem;
+    position: relative;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(-55deg, transparent 0, transparent 60px, rgba(0,0,0,0.05) 60px, rgba(0,0,0,0.05) 61px);
+    pointer-events: none;
+  }
+  .ph-inner { position: relative; padding: 3rem 2rem 0; }
+  .ph-logo {
+    height: 90px;
+    width: auto;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    display: inline-block;
+  }
+  .ph-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .ph-sub {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(253,248,242,0.65);
+  }
+
+  .tab-nav {
+    background: var(--crimson-dk);
+    position: sticky;
+    top: 72px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .tab-nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+  }
+  .tab {
+    background: none;
+    border: none;
+    color: rgba(253,248,242,0.55);
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1.1rem 1.8rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--cream); }
+  .tab.active { color: var(--gold-lt); border-bottom-color: var(--gold-lt); }
+
+  .menu-section-wrap { padding: 5rem 2rem; }
+  .menu-section-wrap.hidden { display: none; }
+  .mw-inner { max-width: 1100px; margin: 0 auto; }
+
+  .allergy-note {
+    background: rgba(139,26,26,0.06);
+    border-left: 3px solid var(--crimson);
+    padding: 0.9rem 1.4rem;
+    font-size: 0.82rem;
+    color: rgba(45,26,14,0.6);
+    margin-bottom: 4rem;
+    font-style: italic;
+  }
+
+  .menu-block { margin-bottom: 5rem; }
+  .block-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--crimson);
+    margin-bottom: 0.5rem;
+  }
+  .block-title em { font-style: italic; color: var(--crimson); }
+  .block-note {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: rgba(45,26,14,0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 0;
+  }
+  .item {
+    padding: 1.4rem 2rem 1.4rem 0;
+    border-bottom: 1px solid rgba(139,26,26,0.1);
+  }
+  .item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .item-name {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .item-dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(139,26,26,0.3);
+    min-width: 16px;
+    margin-bottom: 4px;
+  }
+  .item-price {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--crimson);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .item-desc {
+    font-size: 0.82rem;
+    color: rgba(45,26,14,0.55);
+    line-height: 1.6;
+  }
+
+  /* THREE COURSE */
+  .tc-banner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    background: var(--crimson);
+    padding: 3rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+  .tc-logo {
+    height: 80px;
+    width: auto;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .tc-heading {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .tc-price {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--gold-lt);
+    font-style: italic;
+    margin-bottom: 0.4rem;
+  }
+  .tc-sub { font-size: 0.88rem; color: rgba(253,248,242,0.65); }
+  .tc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+  }
+  .tc-course-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--crimson);
+  }
+  .tc-num {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: rgba(139,26,26,0.2);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .tc-course-name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .tc-course-name em { color: var(--crimson); }
+  .tc-items { display: flex; flex-direction: column; }
+  .tc-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(139,26,26,0.1);
+    position: relative;
+  }
+  .tc-item strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .tc-item p { font-size: 0.8rem; color: rgba(45,26,14,0.55); line-height: 1.5; padding-right: 3.5rem; }
+  .tc-item.supplement span {
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--crimson);
+    letter-spacing: 0.05em;
+  }
+
+  /* BOTTOM CTA */
+  .menu-cta {
+    background: var(--crimson);
+    text-align: center;
+    padding: 4rem 2rem;
+    color: rgba(253,248,242,0.8);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .menu-cta strong { color: var(--gold-lt); }
+
+  @media (max-width: 600px) {
+    .items { grid-template-columns: 1fr; }
+    .tab { padding: 1rem 1rem; font-size: 0.58rem; }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.menu-section-wrap');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.add('hidden'));
+      tab.classList.add('active');
+      document.getElementById(`tab-${(tab as HTMLButtonElement).dataset.tab}`)?.classList.remove('hidden');
+    });
+  });
+</script>

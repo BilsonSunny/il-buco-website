@@ -1,0 +1,521 @@
+---
+import Layout from '../layouts/Layout.astro';
+import specials from '../data/specials.json';
+---
+<Layout title="Daily Specials" description="Today's chef's daily specials at Il Buco Ristorante in Downtown Barrie, Ontario.">
+
+  <!-- HEADER -->
+  <header class="spec-header">
+    <div class="sh-inner">
+      <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="sh-logo" />
+      <h1 class="sh-title">Daily Specials</h1>
+      <p class="sh-sub">Fresh inspiration from our kitchen, every day</p>
+    </div>
+  </header>
+
+  <!-- DATE BAR -->
+  <div class="date-bar">
+    <div class="date-inner">
+      <span class="date-label">Today's Date</span>
+      <span class="date-val" id="todayDate">—</span>
+    </div>
+  </div>
+
+  <!-- SPECIALS -->
+  <section class="spec-section">
+    <div class="spec-inner">
+
+      {specials.length > 0 ? (
+        <div class="spec-list" id="specList">
+          {specials.map((s, i) => (
+            <article class="spec-item" style={`animation-delay:${i * 0.08}s`}>
+              <div class="spec-index">{String(i + 1).padStart(2, '0')}</div>
+              <div class="spec-body">
+                <span class="spec-cat">{s.category}</span>
+                <h2 class="spec-name">{s.title}</h2>
+                <p class="spec-desc">{s.description}</p>
+              </div>
+              <div class="spec-price">{s.price}</div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="spec-empty" id="specList">
+          <img src="/il-buco-logo.jpg" alt="Il Buco" class="empty-logo" />
+          <p>No specials listed yet today.</p>
+          <p>Call us at <a href="tel:7057359595">705-735-9595</a> for today's offerings.</p>
+        </div>
+      )}
+
+      <!-- Session-added specials appear here -->
+      <div id="sessionSpecials"></div>
+    </div>
+  </section>
+
+  <!-- STAFF PANEL -->
+  <section class="admin-section">
+    <div class="admin-inner">
+      <div class="admin-top">
+        <div class="admin-info">
+          <span class="label">Staff Panel</span>
+          <h2 class="admin-title">Add Today's Special</h2>
+          <p class="admin-note">Add specials here to preview them instantly. To make them permanent, copy the generated JSON into <code>src/data/specials.json</code> and redeploy.</p>
+        </div>
+        <button class="toggle-btn" id="toggleBtn">+ Add Special</button>
+      </div>
+
+      <form class="spec-form hidden" id="specForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Dish Name *</label>
+            <input type="text" id="f-name" placeholder="e.g. Osso Buco Milanese" required />
+          </div>
+          <div class="field">
+            <label for="f-cat">Category *</label>
+            <select id="f-cat">
+              <option>Entrée</option>
+              <option>Pasta</option>
+              <option>Appetizer</option>
+              <option>Soup</option>
+              <option>Salad</option>
+              <option>Dessert</option>
+              <option>Chef's Special</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-price">Price *</label>
+            <input type="text" id="f-price" placeholder="e.g. $34.50" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-desc">Description *</label>
+          <textarea id="f-desc" rows="3" placeholder="Describe the dish — ingredients, preparation, sauce…" required></textarea>
+        </div>
+        <div class="form-btns">
+          <button type="submit" class="btn-submit">Add to Today's Specials</button>
+          <button type="button" id="cancelBtn" class="btn-cancel">Cancel</button>
+        </div>
+      </form>
+
+      <!-- JSON output -->
+      <div class="json-block hidden" id="jsonBlock">
+        <h3>📋 Copy this JSON into <code>src/data/specials.json</code> to make specials permanent:</h3>
+        <pre id="jsonOut"></pre>
+        <button class="btn-copy" id="copyBtn">Copy to Clipboard</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <div class="spec-cta">
+    <p><em>Specials are available while ingredients last. Reservations recommended.</em></p>
+    <a href="tel:7057359595" class="btn btn-gold" style="margin-top:1rem;">📞 705-735-9595</a>
+  </div>
+
+</Layout>
+
+<style>
+  .spec-header {
+    background: var(--crimson);
+    padding-top: 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .spec-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(-55deg, transparent 0, transparent 60px, rgba(0,0,0,0.05) 60px, rgba(0,0,0,0.05) 61px);
+  }
+  .sh-inner { position: relative; padding: 3rem 2rem 4rem; }
+  .sh-logo {
+    height: 80px;
+    width: auto;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    display: inline-block;
+  }
+  .sh-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+  .sh-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(253,248,242,0.6);
+  }
+
+  .date-bar {
+    background: var(--crimson-dk);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .date-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.9rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .date-label {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    font-weight: 600;
+  }
+  .date-val {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(253,248,242,0.75);
+  }
+
+  .spec-section { padding: 5rem 2rem; }
+  .spec-inner { max-width: 1000px; margin: 0 auto; }
+
+  .spec-list { display: flex; flex-direction: column; }
+  .spec-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(139,26,26,0.15);
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  .spec-index {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(139,26,26,0.15);
+    line-height: 1;
+    padding-top: 0.2rem;
+  }
+  .spec-cat {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .spec-name {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    line-height: 1.15;
+  }
+  .spec-desc { font-size: 0.9rem; color: rgba(45,26,14,0.6); line-height: 1.75; max-width: 520px; }
+  .spec-price {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--crimson);
+    font-style: italic;
+    font-weight: 300;
+    white-space: nowrap;
+    padding-top: 1.5rem;
+  }
+
+  .spec-empty {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: var(--parchment);
+  }
+  .empty-logo {
+    height: 70px;
+    width: auto;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    opacity: 0.6;
+  }
+  .spec-empty p {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: rgba(45,26,14,0.55);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .spec-empty a { color: var(--crimson); }
+
+  /* ADMIN */
+  .admin-section {
+    background: var(--parchment);
+    padding: 5rem 2rem;
+    border-top: 2px solid rgba(139,26,26,0.15);
+  }
+  .admin-inner { max-width: 1000px; margin: 0 auto; }
+  .admin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .admin-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .admin-note {
+    font-size: 0.85rem;
+    color: rgba(45,26,14,0.6);
+    line-height: 1.6;
+    max-width: 520px;
+  }
+  .admin-note code {
+    background: rgba(139,26,26,0.1);
+    color: var(--crimson);
+    padding: 0.1em 0.4em;
+    font-size: 0.88em;
+    border-radius: 2px;
+  }
+  .toggle-btn {
+    background: var(--crimson);
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .toggle-btn:hover { background: var(--crimson-dk); }
+
+  .spec-form.hidden { display: none; }
+  .spec-form {
+    background: white;
+    padding: 2.5rem;
+    border: 1px solid rgba(139,26,26,0.15);
+    animation: fadeUp 0.3s ease;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba(45,26,14,0.55);
+  }
+  .field input, .field select, .field textarea {
+    border: 1px solid rgba(139,26,26,0.25);
+    padding: 0.8rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: var(--warm-white);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--crimson);
+  }
+  .field textarea { resize: vertical; }
+  .form-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .btn-submit {
+    background: var(--crimson);
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 2.2rem;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover { background: var(--crimson-dk); }
+  .btn-cancel {
+    background: transparent;
+    color: rgba(45,26,14,0.5);
+    border: 1px solid rgba(45,26,14,0.2);
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
+
+  .json-block {
+    margin-top: 2rem;
+    background: var(--crimson-xdk);
+    padding: 2rem;
+    animation: fadeUp 0.3s ease;
+  }
+  .json-block.hidden { display: none; }
+  .json-block h3 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 1rem;
+  }
+  .json-block h3 code {
+    color: var(--cream);
+    background: rgba(255,255,255,0.1);
+    padding: 0.15em 0.4em;
+    border-radius: 2px;
+  }
+  #jsonOut {
+    background: rgba(0,0,0,0.35);
+    padding: 1.5rem;
+    color: rgba(253,248,242,0.85);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    overflow: auto;
+    max-height: 280px;
+    font-family: monospace;
+    margin-bottom: 1rem;
+    white-space: pre;
+  }
+  .btn-copy {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 0.7rem 1.8rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-copy:hover { background: var(--gold-lt); }
+
+  .spec-cta {
+    background: var(--crimson);
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .spec-cta p {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: rgba(253,248,242,0.7);
+  }
+
+  @media (max-width: 700px) {
+    .spec-item { grid-template-columns: 36px 1fr; }
+    .spec-price { grid-column: 2; padding-top: 0.5rem; font-size: 1.4rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Date
+  const dateEl = document.getElementById('todayDate');
+  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-CA', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Toggle form
+  const toggleBtn = document.getElementById('toggleBtn') as HTMLButtonElement;
+  const specForm = document.getElementById('specForm') as HTMLFormElement;
+  const cancelBtn = document.getElementById('cancelBtn');
+
+  toggleBtn?.addEventListener('click', () => {
+    const isHidden = specForm.classList.contains('hidden');
+    specForm.classList.toggle('hidden');
+    toggleBtn.textContent = isHidden ? '✕ Cancel' : '+ Add Special';
+  });
+  cancelBtn?.addEventListener('click', () => {
+    specForm.classList.add('hidden');
+    specForm.reset();
+    toggleBtn.textContent = '+ Add Special';
+  });
+
+  // Session specials
+  let sessionSpecials: any[] = [];
+  const sessionContainer = document.getElementById('sessionSpecials')!;
+  const jsonBlock = document.getElementById('jsonBlock')!;
+  const jsonOut = document.getElementById('jsonOut')!;
+  const copyBtn = document.getElementById('copyBtn')!;
+
+  specForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('f-name') as HTMLInputElement).value.trim();
+    const cat = (document.getElementById('f-cat') as HTMLSelectElement).value;
+    const price = (document.getElementById('f-price') as HTMLInputElement).value.trim();
+    const desc = (document.getElementById('f-desc') as HTMLTextAreaElement).value.trim();
+    const date = new Date().toISOString().split('T')[0];
+
+    const newSpecial = { date, title: name, description: desc, price, category: cat };
+    sessionSpecials.push(newSpecial);
+
+    // Count existing items for numbering
+    const existingCount = document.querySelectorAll('.spec-item').length;
+    const idx = existingCount + 1;
+
+    // Remove empty state if present
+    const empty = document.querySelector('.spec-empty');
+    if (empty) empty.remove();
+
+    const article = document.createElement('article');
+    article.className = 'spec-item';
+    article.style.animationDelay = '0s';
+    article.innerHTML = `
+      <div class="spec-index">${String(idx).padStart(2,'0')}</div>
+      <div class="spec-body">
+        <span class="spec-cat">${cat}</span>
+        <h2 class="spec-name">${name}</h2>
+        <p class="spec-desc">${desc}</p>
+      </div>
+      <div class="spec-price">${price}</div>
+    `;
+    sessionContainer.appendChild(article);
+
+    // Show JSON
+    jsonBlock.classList.remove('hidden');
+    jsonOut.textContent = JSON.stringify(sessionSpecials, null, 2);
+
+    // Reset
+    specForm.reset();
+    specForm.classList.add('hidden');
+    toggleBtn.textContent = '+ Add Special';
+    article.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  copyBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(jsonOut.textContent || '');
+      copyBtn.textContent = '✓ Copied!';
+      setTimeout(() => { copyBtn.textContent = 'Copy to Clipboard'; }, 2500);
+    } catch {
+      copyBtn.textContent = 'Select text above and copy manually';
+    }
+  });
+</script>

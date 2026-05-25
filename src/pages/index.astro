@@ -1,0 +1,652 @@
+---
+import Layout from '../layouts/Layout.astro';
+import specials from '../data/specials.json';
+---
+<Layout title="Home">
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-crimson-bg">
+      <!-- Decorative diagonal stripe -->
+      <div class="hero-stripe"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-logo-block">
+        <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="hero-logo" />
+      </div>
+      <div class="hero-text">
+        <p class="hero-location">Downtown Barrie, Ontario · Est. 2008</p>
+        <h1 class="hero-headline">
+          Old World Italy.<br />
+          <em>Right Here in Barrie.</em>
+        </h1>
+        <p class="hero-body">
+          Since 2008, Il Buco Ristorante has captured the essence of Nostalgica Italian cuisine — made only with the freshest ingredients, by a master chef whose influence is ever present.
+        </p>
+        <div class="hero-actions">
+          <a href="#reservations" class="btn btn-crimson" style="background:white;color:var(--crimson);border-color:white;">Reserve a Table</a>
+          <a href="/menu" class="btn btn-outline-cream">View Menu</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ══ AWARDS BAR ══ -->
+  <div class="awards-bar">
+    <div class="awards-inner">
+      <div class="award-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>Top 10 Most Romantic Restaurants in Canada</span>
+      </div>
+      <div class="award-dot">·</div>
+      <div class="award-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>Best Overall · Simcoe County</span>
+      </div>
+      <div class="award-dot">·</div>
+      <div class="award-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>TripAdvisor Hall of Fame · Barrie's Best</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STORY ══ -->
+  <section class="story">
+    <div class="story-inner">
+      <div class="story-left">
+        <div class="story-quote-card">
+          <div class="sqc-bg"></div>
+          <div class="sqc-content">
+            <img src="/il-buco-logo.jpg" alt="Il Buco" class="sqc-logo" />
+            <blockquote>
+              "The authentically Italian dishes are made only with the freshest of ingredients and are created by a master chef whose influence is ever present, whatever the inspired selection on the menu."
+            </blockquote>
+          </div>
+        </div>
+        <div class="story-stats">
+          <div class="stat">
+            <span class="stat-num">16+</span>
+            <span class="stat-label">Years of Excellence</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">#1</span>
+            <span class="stat-label">Rated in Barrie</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Fresh Daily</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-right">
+        <span class="label">Our Story</span>
+        <h2 class="section-title">A Passion for <em>Authentic</em> Italian</h2>
+        <span class="rule"></span>
+        <p>Since 2008, Il Buco Ristorante has been the heart of Italian dining in Downtown Barrie. We believe great food begins with great ingredients — sourced fresh, prepared with care, and served with warmth.</p>
+        <p style="margin-top:1.2rem;">Our kitchen draws on the timeless traditions of Old World Italy: hand-made pastas, slow-cooked sauces, perfectly seared seafood and tender veal. Every dish tells a story of a different region, a different memory, a different taste of <em>la dolce vita</em>.</p>
+        <p style="margin-top:1.2rem;">Whether you join us for a romantic dinner, a celebratory lunch, or a weekday escape, you'll find the same dedication to quality and hospitality that has made Il Buco one of Canada's most beloved Italian restaurants.</p>
+        <a href="/menu" class="btn btn-outline-crimson" style="margin-top:2rem;">Explore the Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SPECIALS PREVIEW ══ -->
+  <section class="specials-section">
+    <div class="specials-inner">
+      <div class="specials-header">
+        <div>
+          <span class="label light">From the Chef's Kitchen</span>
+          <h2 class="section-title light">Today's <em>Specials</em></h2>
+          <span class="rule light"></span>
+        </div>
+        <a href="/specials" class="btn btn-outline-cream" style="align-self:flex-start;margin-top:0.5rem;">All Specials</a>
+      </div>
+
+      <div class="specials-cards">
+        {specials.slice(0,3).map((s, i) => (
+          <div class="spec-card" style={`animation-delay:${i * 0.1}s`}>
+            <span class="spec-card-cat">{s.category}</span>
+            <h3 class="spec-card-name">{s.title}</h3>
+            <p class="spec-card-desc">{s.description}</p>
+            <p class="spec-card-price">{s.price}</p>
+          </div>
+        ))}
+        {specials.length === 0 && (
+          <p class="no-spec">Call us for today's specials: <a href="tel:7057359595">705-735-9595</a></p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MENU HIGHLIGHTS ══ -->
+  <section class="highlights">
+    <div class="highlights-inner">
+      <div class="highlights-head">
+        <span class="label">A Taste of What Awaits</span>
+        <h2 class="section-title">Chef's <em>Favourites</em></h2>
+        <span class="rule center"></span>
+      </div>
+      <div class="highlights-grid">
+        <div class="hl-card hl-featured">
+          <span class="hl-cat">Pasta</span>
+          <h3 class="hl-name">Pappardelle Funghi e Tartufo</h3>
+          <p class="hl-desc">Fresh pappardelle ribbons with oyster, king oyster, portobello and enoki mushrooms in a light truffle cream</p>
+          <p class="hl-price">$28.50</p>
+        </div>
+        <div class="hl-card">
+          <span class="hl-cat">Entrée</span>
+          <h3 class="hl-name">Veal Chop</h3>
+          <p class="hl-desc">Grilled veal chop with Portobello and roasted garlic brandy jus</p>
+          <p class="hl-price">$49.50</p>
+        </div>
+        <div class="hl-card">
+          <span class="hl-cat">Appetizer</span>
+          <h3 class="hl-name">Enrico's Famous Garlic</h3>
+          <p class="hl-desc">Oven roasted garlic with goat's cheese cream, pine nuts and sun dried tomatoes</p>
+          <p class="hl-price">$19.50</p>
+        </div>
+        <div class="hl-card">
+          <span class="hl-cat">Entrée</span>
+          <h3 class="hl-name">Pollo Florentina</h3>
+          <p class="hl-desc">Chicken breast stuffed with goat cheese and spinach in a Dijon cream sauce</p>
+          <p class="hl-price">$31.50</p>
+        </div>
+        <div class="hl-card">
+          <span class="hl-cat">Pasta</span>
+          <h3 class="hl-name">Spaghetti Mare</h3>
+          <p class="hl-desc">Shrimp, mussels, calamari and clams in a zesty tomato sauce</p>
+          <p class="hl-price">$28.50</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:3.5rem;">
+        <a href="/menu" class="btn btn-crimson">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESERVATIONS ══ -->
+  <section class="reservations" id="reservations">
+    <div class="res-crimson-panel">
+      <div class="res-inner">
+        <div class="res-left">
+          <span class="label light">Book Your Experience</span>
+          <h2 class="section-title light">Reserve <em>Your Table</em></h2>
+          <span class="rule light"></span>
+          <p class="res-body">Reservations are recommended to ensure your perfect evening. Walk-ins are always welcome when tables are available.</p>
+          <a href="tel:7057359595" class="res-phone">705-735-9595</a>
+          <a href="tel:7057359595" class="btn btn-gold" style="display:inline-block;margin-top:1.5rem;">Call to Reserve</a>
+        </div>
+        <div class="res-right">
+          <div class="hours-card">
+            <img src="/il-buco-logo.jpg" alt="Il Buco" class="hours-logo" />
+            <h3 class="hours-title">Hours of Operation</h3>
+            <div class="hours-list">
+              <div class="hours-row">
+                <span>Tuesday – Thursday</span>
+                <span>11:30am – 9:00pm</span>
+              </div>
+              <div class="hours-row">
+                <span>Friday</span>
+                <span>11:30am – 10:00pm</span>
+              </div>
+              <div class="hours-row">
+                <span>Saturday</span>
+                <span>5:00pm – 10:00pm</span>
+              </div>
+              <div class="hours-row closed-row">
+                <span>Sunday & Monday</span>
+                <span>Closed</span>
+              </div>
+            </div>
+          </div>
+          <div class="togo-card">
+            <strong>Il Buco 2 Go</strong>
+            <p>Can't dine in? Enjoy our famous lasagna, cannelloni, and manicotti at home — just heat and serve.</p>
+            <a href="tel:7057359595" class="btn btn-outline-crimson" style="margin-top:1rem;font-size:0.62rem;padding:0.7rem 1.6rem;">Order by Phone</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-top: 72px;
+    overflow: hidden;
+  }
+  .hero-crimson-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--crimson);
+  }
+  .hero-stripe {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(0,0,0,0.06) 60px,
+      rgba(0,0,0,0.06) 61px
+    );
+  }
+  .hero-content {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 4rem 2.5rem;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .hero-logo-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease both;
+  }
+  .hero-logo {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1);
+    animation: floatLogo 6s ease-in-out infinite;
+  }
+  @keyframes floatLogo {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .hero-text { animation: slideIn 0.9s 0.15s ease both; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .hero-location {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.6);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold-lt);
+    display: block;
+  }
+  .hero-body {
+    font-size: 1rem;
+    color: rgba(253,248,242,0.75);
+    line-height: 1.8;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    margin: 0 auto;
+    animation: scrollDrop 2s ease infinite;
+  }
+  @keyframes scrollDrop {
+    0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .hero-logo { max-width: 260px; }
+    .hero-logo-block { justify-content: center; }
+    .hero-body { margin: 0 auto 2.5rem; }
+    .hero-actions { justify-content: center; }
+  }
+
+  /* AWARDS BAR */
+  .awards-bar {
+    background: var(--crimson-dk);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .awards-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .award-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.7);
+    font-weight: 500;
+  }
+  .award-item svg { color: var(--gold); flex-shrink: 0; }
+  .award-dot { color: rgba(253,248,242,0.2); font-size: 1.2rem; }
+
+  /* STORY */
+  .story { padding: 7rem 2rem; background: var(--cream); }
+  .story-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .story-quote-card {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .sqc-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--crimson);
+    transform: rotate(-1.5deg);
+    border-radius: 2px;
+  }
+  .sqc-content {
+    position: relative;
+    background: var(--crimson);
+    padding: 3rem 2.5rem;
+    border-radius: 2px;
+  }
+  .sqc-logo {
+    width: 120px;
+    height: auto;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .sqc-content blockquote {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(253,248,242,0.9);
+    line-height: 1.8;
+  }
+  .story-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(139,26,26,0.15);
+  }
+  .stat {
+    background: var(--warm-white);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--crimson);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(45,26,14,0.55);
+    font-weight: 500;
+  }
+  .story-right p { color: rgba(45,26,14,0.72); line-height: 1.85; font-size: 1rem; }
+  .story-right em { font-style: italic; color: var(--crimson); }
+
+  @media (max-width: 900px) {
+    .story-inner { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  /* SPECIALS */
+  .specials-section {
+    background: var(--crimson);
+    padding: 7rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .specials-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0, transparent 80px,
+      rgba(0,0,0,0.04) 80px, rgba(0,0,0,0.04) 81px
+    );
+    pointer-events: none;
+  }
+  .specials-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .specials-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .specials-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: rgba(255,255,255,0.1);
+  }
+  .spec-card {
+    background: var(--crimson-dk);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    animation: fadeIn 0.6s ease both;
+  }
+  .spec-card:hover { background: var(--crimson-xdk); }
+  .spec-card-cat {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .spec-card-name {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  .spec-card-desc { font-size: 0.88rem; color: rgba(253,248,242,0.62); line-height: 1.7; margin-bottom: 1.5rem; }
+  .spec-card-price {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--gold-lt);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .no-spec { color: rgba(253,248,242,0.6); font-style: italic; text-align: center; padding: 3rem; }
+  .no-spec a { color: var(--gold-lt); }
+
+  /* HIGHLIGHTS */
+  .highlights { padding: 7rem 2rem; background: var(--parchment); }
+  .highlights-inner { max-width: 1100px; margin: 0 auto; }
+  .highlights-head { text-align: center; margin-bottom: 4rem; }
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2px;
+    background: rgba(139,26,26,0.12);
+  }
+  .hl-card {
+    background: var(--cream);
+    padding: 2.2rem 2rem;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .hl-card:hover { background: white; transform: translateY(-2px); }
+  .hl-featured {
+    grid-column: span 2;
+    background: var(--crimson);
+  }
+  .hl-featured:hover { background: var(--crimson-lt); transform: none; }
+  .hl-featured .hl-cat { color: var(--gold-lt); }
+  .hl-featured .hl-name { color: var(--cream); }
+  .hl-featured .hl-desc { color: rgba(253,248,242,0.72); }
+  .hl-featured .hl-price { color: var(--gold-lt); }
+  .hl-cat {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .hl-name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+  }
+  .hl-desc { font-size: 0.85rem; color: rgba(45,26,14,0.58); line-height: 1.65; margin-bottom: 1rem; }
+  .hl-price {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--crimson);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  @media (max-width: 760px) {
+    .highlights-grid { grid-template-columns: 1fr; }
+    .hl-featured { grid-column: span 1; }
+  }
+
+  /* RESERVATIONS */
+  .reservations { background: var(--cream); }
+  .res-crimson-panel { background: var(--crimson); }
+  .res-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 7rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .res-body {
+    color: rgba(253,248,242,0.75);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .res-phone {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-style: italic;
+    color: var(--gold-lt);
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .res-phone:hover { color: var(--cream); }
+  .hours-card {
+    background: var(--cream);
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .hours-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .hours-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hours-list { display: flex; flex-direction: column; gap: 0; }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(139,26,26,0.1);
+    font-size: 0.9rem;
+  }
+  .hours-row span:first-child { color: rgba(45,26,14,0.6); }
+  .hours-row span:last-child { font-weight: 600; color: var(--ink); font-family: var(--font-sans); font-size: 0.82rem; }
+  .closed-row span { color: rgba(45,26,14,0.35) !important; font-style: italic; }
+  .togo-card {
+    background: var(--parchment);
+    padding: 2rem 2.5rem;
+    border-left: 4px solid var(--crimson);
+  }
+  .togo-card strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--crimson);
+    margin-bottom: 0.75rem;
+  }
+  .togo-card p { font-size: 0.9rem; color: rgba(45,26,14,0.65); line-height: 1.7; }
+
+  @media (max-width: 900px) {
+    .res-inner { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  }
+</style>
