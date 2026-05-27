@@ -1,13 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import specials from '../data/specials.json';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const logo = `${base}/il-buco-logo.jpg`;
 ---
+
 <Layout title="Daily Specials" description="Today's chef's daily specials at Il Buco Ristorante in Downtown Barrie, Ontario.">
 
   <!-- HEADER -->
   <header class="spec-header">
     <div class="sh-inner">
-      <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="sh-logo" />
+      <img src={logo} alt="Il Buco Ristorante" class="sh-logo" />
       <h1 class="sh-title">Daily Specials</h1>
       <p class="sh-sub">Fresh inspiration from our kitchen, every day</p>
     </div>
@@ -41,7 +44,7 @@ import specials from '../data/specials.json';
         </div>
       ) : (
         <div class="spec-empty" id="specList">
-          <img src="/il-buco-logo.jpg" alt="Il Buco" class="empty-logo" />
+          <img src={logo} alt="Il Buco" class="empty-logo" />
           <p>No specials listed yet today.</p>
           <p>Call us at <a href="tel:7057359595">705-735-9595</a> for today's offerings.</p>
         </div>

@@ -1,13 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { dinnerMenu, lunchMenu } from '../data/menu.js';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const logo = `${base}/il-buco-logo.jpg`;
 ---
+
 <Layout title="Menu" description="Explore the full dinner and lunch menus at Il Buco Ristorante in Downtown Barrie, Ontario.">
 
   <!-- PAGE HEADER -->
   <header class="page-header">
     <div class="ph-inner">
-      <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="ph-logo" />
+      <img src={logo} alt="Il Buco Ristorante" class="ph-logo" />
       <h1 class="ph-title">Our Menu</h1>
       <p class="ph-sub">Crafted fresh. Inspired by the heart of Italy.</p>
     </div>
@@ -137,7 +140,7 @@ import { dinnerMenu, lunchMenu } from '../data/menu.js';
   <section class="menu-section-wrap hidden" id="tab-threecourse">
     <div class="mw-inner">
       <div class="tc-banner">
-        <img src="/il-buco-logo.jpg" alt="Il Buco" class="tc-logo" />
+        <img src={logo} alt="Il Buco" class="tc-logo" />
         <div>
           <h2 class="tc-heading">Three Course Lunch</h2>
           <p class="tc-price">$25.95 per person</p>

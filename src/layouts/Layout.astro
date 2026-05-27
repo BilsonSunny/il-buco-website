@@ -1,8 +1,7 @@
 ---
-
-import { base } from 'astro:config/client';
 const { title = "Home", description = "Authentic Italian fine dining in Downtown Barrie, Ontario since 2008." } = Astro.props;
-const logoSrc = `${base}/il-buco-website/il-buco-logo.jpg`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const logo = `${base}/il-buco-logo.jpg`;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,7 +19,7 @@ const logoSrc = `${base}/il-buco-website/il-buco-logo.jpg`;
     <nav class="nav" id="mainNav">
       <div class="nav-inner">
         <a href="/" class="nav-logo">
-          <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="nav-logo-img" />
+          <img src={logo} alt="Il Buco Ristorante" class="nav-logo-img" />
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
@@ -40,7 +39,7 @@ const logoSrc = `${base}/il-buco-website/il-buco-logo.jpg`;
 
     <footer class="footer">
       <div class="footer-logo-wrap">
-        <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="footer-logo-img" />
+        <img src={logo} alt="Il Buco Ristorante" class="footer-logo-img" />
       </div>
       <div class="footer-inner">
         <div class="footer-col">

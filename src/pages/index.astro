@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import specials from '../data/specials.json';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const logo = `${base}/il-buco-logo.jpg`;
 ---
 <Layout title="Home">
 
@@ -12,7 +14,7 @@ import specials from '../data/specials.json';
     </div>
     <div class="hero-content">
       <div class="hero-logo-block">
-        <img src="/il-buco-logo.jpg" alt="Il Buco Ristorante" class="hero-logo" />
+        <img src={logo} alt="Il Buco Ristorante" class="hero-logo" />
       </div>
       <div class="hero-text">
         <p class="hero-location">Downtown Barrie, Ontario · Est. 2008</p>
@@ -61,7 +63,7 @@ import specials from '../data/specials.json';
         <div class="story-quote-card">
           <div class="sqc-bg"></div>
           <div class="sqc-content">
-            <img src="/il-buco-logo.jpg" alt="Il Buco" class="sqc-logo" />
+            <img src={logo} alt="Il Buco" class="sqc-logo" />
             <blockquote>
               "The authentically Italian dishes are made only with the freshest of ingredients and are created by a master chef whose influence is ever present, whatever the inspired selection on the menu."
             </blockquote>
@@ -182,7 +184,7 @@ import specials from '../data/specials.json';
         </div>
         <div class="res-right">
           <div class="hours-card">
-            <img src="/il-buco-logo.jpg" alt="Il Buco" class="hours-logo" />
+            <img src={logo} alt="Il Buco" class="hours-logo" />
             <h3 class="hours-title">Hours of Operation</h3>
             <div class="hours-list">
               <div class="hours-row">
